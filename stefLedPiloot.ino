@@ -25,17 +25,18 @@ const int links2 = 10;
 const int rechts2 = 11;
 
 unsigned long motorTimer = 0;
-
+int ledWaiter = 250;
+bool booted = false;
 void setup()
 {
   strip1.begin();
   strip1.show(); // Initialize all pixels to 'off'
   strip2.begin();
   strip2.show(); // Initialize all pixels to 'off'
-  strip2.begin();
-  strip2.show(); // Initialize all pixels to 'off'
-  strip2.begin();
-  strip2.show(); // Initialize all pixels to 'off'
+  strip3.begin();
+  strip3.show(); // Initialize all pixels to 'off'
+  strip4.begin();
+  strip4.show(); // Initialize all pixels to 'off'
   
   pinMode(links1, OUTPUT);
   pinMode(rechts1, OUTPUT);
@@ -50,13 +51,20 @@ void setup()
 
 void loop()
 {
-  if(millis() > (motorTimer + 500)) {
-    motorTimer = millis();
-    if (millis() < 10000) {
-      doVooruit();
-    } else {
-      randomPart(); 
-    }
+    if (!booted)
+      //powerOnSelfTest();
+
+rainbow(0);
+    if(millis() > (motorTimer + 500)) {
+      motorTimer = millis();
+      if (millis() < 10000) 
+      {
+        doVooruit();
+      } 
+      else 
+      {
+        randomPart(); 
+      }
   }
 }
 
@@ -82,6 +90,74 @@ void randomPart() {
   }
 }
 
+void powerOnSelfTest()
+{
+  colorWipePlyr1(strip1.Color(0, 0, 0), 50); // Red
+  colorWipePlyr2(strip2.Color(0, 0, 0), 50); // Red
+  colorWipePlyr3(strip3.Color(0, 0, 0), 50); // Red
+  colorWipePlyr4(strip4.Color(0, 0, 0), 50); // Red
+  colorWipePlyr1(strip1.Color(255, 0, 0), 100); // Red
+  colorWipePlyr2(strip2.Color(255, 0, 0), 100); // Red
+  colorWipePlyr3(strip3.Color(255, 0, 0), 100); // Red
+  colorWipePlyr4(strip4.Color(255, 0, 0), 100); // Red 
+  colorWipePlyr1(strip1.Color(0, 255, 0), 25); // green
+  colorWipePlyr2(strip2.Color(0, 255, 0), 25); // green
+  colorWipePlyr3(strip3.Color(0, 255, 0), 25); // green
+  colorWipePlyr4(strip4.Color(0, 255, 0), 25); // green 
+  colorWipePlyr1(strip1.Color(0, 0, 255), 10); // blue
+  colorWipePlyr2(strip2.Color(0, 0, 255), 10); // blue
+  colorWipePlyr3(strip3.Color(0, 0, 255), 10); // blue
+  colorWipePlyr4(strip4.Color(0, 0, 255), 10); // blue 
+  colorWipePlyr1(strip1.Color(0, 0, 0), 0); // Red
+  colorWipePlyr2(strip2.Color(0, 0, 0), 0); // Red
+  colorWipePlyr3(strip3.Color(0, 0, 0), 0); // Red
+  colorWipePlyr4(strip4.Color(0, 0, 0), 0); // Red
+  
+  colorWipePlyr1(strip1.Color(255, 0, 0), 0); // Red
+  delay(ledWaiter);
+  colorWipePlyr1(strip1.Color(0, 0, 0), 0); // Red
+  colorWipePlyr2(strip2.Color(255, 0, 0), 0); // Red
+  delay(ledWaiter);
+  colorWipePlyr2(strip2.Color(0, 0, 0), 0); // Red
+  colorWipePlyr3(strip3.Color(255, 0, 0), 0); // Red
+  delay(ledWaiter);  
+  colorWipePlyr3(strip3.Color(0, 0, 0), 0); // Red
+  colorWipePlyr4(strip4.Color(255, 0, 0), 0); // Red
+  delay(ledWaiter);  
+  colorWipePlyr4(strip4.Color(0, 0, 0), 0); // Red
+  colorWipePlyr1(strip1.Color(0, 0, 0), 0); // Red
+  
+  colorWipePlyr1(strip1.Color(255, 0, 0), 0); // Red
+  colorWipePlyr2(strip2.Color(255, 0, 0), 0); // Red
+  colorWipePlyr3(strip3.Color(255, 0, 0), 0); // Red
+  colorWipePlyr4(strip4.Color(255, 0, 0), 0); // Red
+  delay(ledWaiter);
+  colorWipePlyr1(strip1.Color(0, 0, 0), 0); // Red
+  colorWipePlyr2(strip2.Color(0, 0, 0), 0); // Red
+  colorWipePlyr3(strip3.Color(0, 0, 0), 0); // Red
+  colorWipePlyr4(strip4.Color(0, 0, 0), 0); // Red
+  delay(ledWaiter);
+  colorWipePlyr1(strip1.Color(0, 255, 0), 0); // green
+  colorWipePlyr2(strip2.Color(0, 255, 0), 0); // green
+  colorWipePlyr3(strip3.Color(0, 255, 0), 0); // green
+  colorWipePlyr4(strip4.Color(0, 255, 0), 0); // green 
+  delay(ledWaiter);
+  colorWipePlyr1(strip1.Color(0, 0, 0), 0); // Red
+  colorWipePlyr2(strip2.Color(0, 0, 0), 0); // Red
+  colorWipePlyr3(strip3.Color(0, 0, 0), 0); // Red
+  colorWipePlyr4(strip4.Color(0, 0, 0), 0); // Red
+  delay(ledWaiter);
+  colorWipePlyr1(strip1.Color(0, 0, 255), 0); // blue
+  colorWipePlyr2(strip2.Color(0, 0, 255), 0); // blue
+  colorWipePlyr3(strip3.Color(0, 0, 255), 0); // blue
+  colorWipePlyr4(strip4.Color(0, 0, 255), 0); // blue
+  delay(ledWaiter);
+  colorWipePlyr1(strip1.Color(0, 0, 0), 0); // Red
+  colorWipePlyr2(strip2.Color(0, 0, 0), 0); // Red
+  colorWipePlyr3(strip3.Color(0, 0, 0), 0); // Red
+  colorWipePlyr4(strip4.Color(0, 0, 0), 0); // Red
+  booted = true;
+}
 void doStop() {
   Serial.println("State Stop Entered");
   digitalWrite(links1, LOW);
@@ -91,7 +167,7 @@ void doStop() {
 }
 
 void doAchteruit(){
-  Serial.println("State Links Entered");
+  Serial.println("State Achteruit Entered");
   digitalWrite(links1, LOW);
   digitalWrite(rechts1, LOW);
   digitalWrite(links2, LOW);
@@ -99,7 +175,7 @@ void doAchteruit(){
 }
 
 void doVooruit(){
-  Serial.println("State Rechts Entered");
+  Serial.println("State Vooruit Entered");
   digitalWrite(links1, HIGH);
   digitalWrite(rechts1, HIGH);
   digitalWrite(links2, HIGH);
@@ -131,6 +207,44 @@ void colorWipePlyr3(uint32_t c, uint8_t wait) {
 void colorWipePlyr4(uint32_t c, uint8_t wait) {
   for(uint16_t i=0; i<strip4.numPixels(); i++) {
     strip4.setPixelColor(i, c);
+    strip4.show();
+    delay(wait);
+  }
+}
+uint32_t Wheel(byte WheelPos) {
+  WheelPos = 255 - WheelPos;
+  if(WheelPos < 85) {
+    return strip1.Color(255 - WheelPos * 3, 0, WheelPos * 3);
+    return strip2.Color(255 - WheelPos * 3, 0, WheelPos * 3);
+    return strip3.Color(255 - WheelPos * 3, 0, WheelPos * 3);
+    return strip4.Color(255 - WheelPos * 3, 0, WheelPos * 3);
+  }
+  if(WheelPos < 170) {
+    WheelPos -= 85;
+    return strip1.Color(0, WheelPos * 3, 255 - WheelPos * 3);
+    return strip2.Color(0, WheelPos * 3, 255 - WheelPos * 3);
+    return strip3.Color(0, WheelPos * 3, 255 - WheelPos * 3);
+    return strip4.Color(0, WheelPos * 3, 255 - WheelPos * 3);
+  }
+  WheelPos -= 170;
+  return strip1.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
+  return strip2.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
+  return strip3.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
+  return strip4.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
+}
+void rainbow(uint8_t wait) {
+  uint16_t i, j;
+
+  for(j=0; j<256; j++) {
+    for(i=0; i<22; i++) {
+      strip1.setPixelColor(i, Wheel((i+j) & 255));
+      strip2.setPixelColor(i, Wheel((i+j) & 255));
+      strip3.setPixelColor(i, Wheel((i+j) & 255));
+      strip4.setPixelColor(i, Wheel((i+j) & 255));
+    }
+    strip1.show();
+    strip2.show();
+    strip3.show();
     strip4.show();
     delay(wait);
   }
